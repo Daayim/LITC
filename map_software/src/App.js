@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline, ImageOverlay } from 'react-leaflet';
 import L from 'leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
@@ -14,6 +14,7 @@ function App() {
   const [baseStations, setBaseStations] = useState([]);
   const [selectedBaseStation, setSelectedBaseStation] = useState(null);
   const [selectedUE, setSelectedUE] = useState(null);
+  const [showPolarPlot, setShowPolarPlot] = useState(false);
 
   useEffect(() => {
     // Initialize base stations on component mount
@@ -62,7 +63,6 @@ function App() {
           click: () => handleUEClick(ue),
         }}
       >
-        <Popup>{ue.UE_ID}</Popup>
       </Marker>
     ));
   }
@@ -99,7 +99,6 @@ function App() {
           mouseout: (e) => toggleIconSize(e.target, false, true, selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID),
         }}
       >
-        <Popup>{station.Base_Station_ID}</Popup>
       </Marker>
     ));
   }
@@ -134,10 +133,30 @@ function App() {
   /*      Data Visualization      */
   //////////////////////////////////
 
+
+  // Define the bounds for the image overlay
+  const deltaLat = 0.05; // Arbitrary small latitude delta for the image size
+  const deltaLng = 0.1; // Arbitrary small longitude delta for the image size
+  const imageBounds = [
+    [defaultCenter[0] - deltaLat, defaultCenter[1] - deltaLng],
+    [defaultCenter[0] + deltaLat, defaultCenter[1] + deltaLng]
+  ];
+
   function foo() {
     return;
   }
 
+  function generatePolarPlot() {
+    setShowPolarPlot(!showPolarPlot); // Toggle the visibility of the polar plot
+  }
+
+  const getImageBounds = () => {
+    const center = selectedUE ? [selectedUE.Latitude, selectedUE.Longitude] : defaultCenter;
+    return [
+      [center[0] - deltaLat, center[1] - deltaLng],
+      [center[0] + deltaLat, center[1] + deltaLng],
+    ];
+  };
 
 
 
@@ -145,6 +164,7 @@ function App() {
     <div className="App">
       <MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {showPolarPlot && <ImageOverlay url="/signal_power_distribution.png" bounds={getImageBounds()} />}
         {renderBaseStationMarkers()}
         {renderUEMarkers()}
         {renderConnectionLine()}
@@ -158,7 +178,7 @@ function App() {
         <h3>Data visualization</h3>
         <p>Display selected UE data and generate plots.</p>
         <p>
-          <button onClick={foo}>
+          <button onClick={generatePolarPlot}>
             Generate Polar Plot
           </button>
           <button onClick={foo}>
