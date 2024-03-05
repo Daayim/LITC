@@ -127,6 +127,7 @@ function App() {
     setBaseStations([]);
     setSelectedBaseStation(null);
     setSelectedUE(null);
+    setShowPolarPlot(null);
   }
 
   //////////////////////////////////
@@ -147,7 +148,9 @@ function App() {
   }
 
   function generatePolarPlot() {
-    setShowPolarPlot(!showPolarPlot); // Toggle the visibility of the polar plot
+    if (selectedUE != null) {
+      setShowPolarPlot(!showPolarPlot); // Toggle the visibility of the polar plot
+    }
   }
 
   const getImageBounds = () => {
@@ -164,7 +167,7 @@ function App() {
     <div className="App">
       <MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {showPolarPlot && <ImageOverlay url="/signal_power_distribution.png" bounds={getImageBounds()} />}
+        {selectedUE && showPolarPlot && <ImageOverlay url="/signal_power_distribution.png" bounds={getImageBounds()} />}
         {renderBaseStationMarkers()}
         {renderUEMarkers()}
         {renderConnectionLine()}
@@ -178,13 +181,13 @@ function App() {
         <h3>Data visualization</h3>
         <p>Display selected UE data and generate plots.</p>
         <p>
-          <button onClick={generatePolarPlot}>
+          <button onClick={generatePolarPlot} disabled={!selectedUE}>
             Generate Polar Plot
           </button>
-          <button onClick={foo}>
+          <button onClick={foo} disabled={!selectedUE}>
             Generate Heat Map
           </button>
-          <button onClick={foo}>
+          <button onClick={foo} disabled={!selectedUE}>
             Generate 3D Map
           </button>
           <br></br>
