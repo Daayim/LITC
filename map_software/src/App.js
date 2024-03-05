@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
@@ -13,6 +13,7 @@ function App() {
   const mapRef = useRef();
   const [baseStations, setBaseStations] = useState([]);
   const [selectedBaseStation, setSelectedBaseStation] = useState(null);
+  const [selectedUE, setSelectedUE] = useState(null);
 
   useEffect(() => {
     // Initialize base stations on component mount
@@ -34,6 +35,58 @@ function App() {
     }
   }
 
+
+
+  //////////////////////////////////
+  /*        User Equipment        */
+  //////////////////////////////////
+
+  function handleUEClick(ue) {
+    if (selectedUE && selectedUE.UE_ID === ue.UE_ID) {
+      setSelectedUE(null); // Deselect if the same UE is clicked
+    } else {
+      setSelectedUE(ue); // Select the UE
+    }
+  }
+
+  function renderUEMarkers() {
+    if (!selectedBaseStation) return null;
+    return selectedBaseStation.UEs.map((ue, index) => (
+      <Marker
+        key={index}
+        position={[ue.Latitude, ue.Longitude]}
+        icon={ueIcon}
+        eventHandlers={{
+          mouseover: (e) => toggleIconSize(e.target, true, false, false),
+          mouseout: (e) => toggleIconSize(e.target, false, false, false),
+          click: () => handleUEClick(ue),
+        }}
+      >
+        <Popup>{ue.UE_ID}</Popup>
+      </Marker>
+    ));
+  }
+
+  function renderConnectionLine() {
+    if (!selectedUE || !selectedBaseStation) return null;
+    const polylinePoints = [
+      [selectedBaseStation.Latitude, selectedBaseStation.Longitude],
+      [selectedUE.Latitude, selectedUE.Longitude]
+    ];
+
+    return (
+      <Polyline
+        positions={polylinePoints}
+        color="red"
+        dashArray="4"
+      />
+    );
+  }
+
+  //////////////////////////////////
+  /*         Base Station         */
+  //////////////////////////////////
+
   function renderBaseStationMarkers() {
     return baseStations.map((station, index) => (
       <Marker
@@ -51,46 +104,41 @@ function App() {
     ));
   }
 
-  function renderUEMarkers() {
-    if (!selectedBaseStation) return null;
-    return selectedBaseStation.UEs.map((ue, index) => (
-      <Marker
-        key={index}
-        position={[ue.Latitude, ue.Longitude]}
-        icon={ueIcon}
-        eventHandlers={{
-          mouseover: (e) => toggleIconSize(e.target, true, false, false),
-          mouseout: (e) => toggleIconSize(e.target, false, false, false),
-        }}
-      >
-        <Popup>{ue.UE_ID}</Popup>
-      </Marker>
-    ));
-  }
-
   function handleBaseStationClick(station) {
     if (selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID) {
       setSelectedBaseStation(null); // Deselect if the same station is clicked
+      setSelectedUE(null); // Also deselect any selected UE
     } else {
       setSelectedBaseStation(station); // Select new station
+      setSelectedUE(null); // Ensure no UE is selected when a new station is selected
     }
   }
 
 
-
-  function clearMarkers() {
-    setBaseStations([]);
-    setSelectedBaseStation(null);
-  }
-
-  function foo() {
-    return;
-  }
+  ///////////////////////////////////
+  /* Fetching and Clearing Markers */
+  ///////////////////////////////////
 
   async function fetchBSData() {
     // Directly set the imported data since you're not fetching from a remote source
     setBaseStations(baseStationData);
   }
+
+  function clearMarkers() {
+    setBaseStations([]);
+    setSelectedBaseStation(null);
+    setSelectedUE(null);
+  }
+
+  //////////////////////////////////
+  /*      Data Visualization      */
+  //////////////////////////////////
+
+  function foo() {
+    return;
+  }
+
+
 
 
   return (
@@ -99,6 +147,7 @@ function App() {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {renderBaseStationMarkers()}
         {renderUEMarkers()}
+        {renderConnectionLine()}
       </MapContainer>
       <div className="sidebar">
         <h2>LITC MAP Software</h2>
@@ -121,6 +170,12 @@ function App() {
           <br></br>
           <hr></hr>
         </p>
+        <div>
+          <h3>Selected Base Station</h3>
+          <p>{selectedBaseStation ? selectedBaseStation.Base_Station_ID : "None"}</p>
+          <h3>Selected UE</h3>
+          <p>{selectedUE ? selectedUE.UE_ID : "None"}</p>
+        </div>
       </div>
     </div>
   );
