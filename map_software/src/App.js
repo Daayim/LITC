@@ -1,23 +1,127 @@
-import logo from './logo.svg';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 import './App.css';
+import 'leaflet/dist/leaflet.css';
+
+import baseStationData from './Canadian_Cities_Base_Stations_and_UEs.json';
+
+const defaultCenter = [45.4200, -75.6900];
+const defaultZoom = 8;
 
 function App() {
+  const mapRef = useRef();
+  const [baseStations, setBaseStations] = useState([]);
+  const [selectedBaseStation, setSelectedBaseStation] = useState(null);
+
+  useEffect(() => {
+    // Initialize base stations on component mount
+    setBaseStations(baseStationData);
+  }, []);
+
+  const baseStationIcon = L.icon({ iconUrl: '/base_station_unclicked.png', iconSize: [50, 50] });
+  const baseStationIconLarge = L.icon({ iconUrl: '/base_station_unclicked.png', iconSize: [70, 70] });
+  const baseStationClickedIcon = L.icon({ iconUrl: '/base_station_clicked.png', iconSize: [50, 50] });
+  const baseStationClickedIconLarge = L.icon({ iconUrl: '/base_station_clicked.png', iconSize: [70, 70] });
+  const ueIcon = L.icon({ iconUrl: '/user_equipment.png', iconSize: [35, 35] });
+  const ueIconLarge = L.icon({ iconUrl: '/user_equipment.png', iconSize: [50, 50] });
+
+  function toggleIconSize(marker, isHovering, isBaseStation, isSelected) {
+    if (isBaseStation) {
+      marker.setIcon(isHovering ? (isSelected ? baseStationClickedIconLarge : baseStationIconLarge) : (isSelected ? baseStationClickedIcon : baseStationIcon));
+    } else {
+      marker.setIcon(isHovering ? ueIconLarge : ueIcon);
+    }
+  }
+
+  function renderBaseStationMarkers() {
+    return baseStations.map((station, index) => (
+      <Marker
+        key={index}
+        position={[station.Latitude, station.Longitude]}
+        icon={selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID ? baseStationClickedIcon : baseStationIcon}
+        eventHandlers={{
+          click: () => handleBaseStationClick(station),
+          mouseover: (e) => toggleIconSize(e.target, true, true, selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID),
+          mouseout: (e) => toggleIconSize(e.target, false, true, selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID),
+        }}
+      >
+        <Popup>{station.Base_Station_ID}</Popup>
+      </Marker>
+    ));
+  }
+
+  function renderUEMarkers() {
+    if (!selectedBaseStation) return null;
+    return selectedBaseStation.UEs.map((ue, index) => (
+      <Marker
+        key={index}
+        position={[ue.Latitude, ue.Longitude]}
+        icon={ueIcon}
+        eventHandlers={{
+          mouseover: (e) => toggleIconSize(e.target, true, false, false),
+          mouseout: (e) => toggleIconSize(e.target, false, false, false),
+        }}
+      >
+        <Popup>{ue.UE_ID}</Popup>
+      </Marker>
+    ));
+  }
+
+  function handleBaseStationClick(station) {
+    if (selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID) {
+      setSelectedBaseStation(null); // Deselect if the same station is clicked
+    } else {
+      setSelectedBaseStation(station); // Select new station
+    }
+  }
+
+
+
+  function clearMarkers() {
+    setBaseStations([]);
+    setSelectedBaseStation(null);
+  }
+
+  function foo() {
+    return;
+  }
+
+  async function fetchBSData() {
+    // Directly set the imported data since you're not fetching from a remote source
+    setBaseStations(baseStationData);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {renderBaseStationMarkers()}
+        {renderUEMarkers()}
+      </MapContainer>
+      <div className="sidebar">
+        <h2>LITC MAP Software</h2>
+        <p>Frontend visualization tool for LITC Project.</p>
+        <button onClick={fetchBSData}>Fetch Base Stations</button>
+        <button onClick={clearMarkers}>Clear Markers</button>
+        <hr></hr>
+        <h3>Data visualization</h3>
+        <p>Display selected UE data and generate plots.</p>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <button onClick={foo}>
+            Generate Polar Plot
+          </button>
+          <button onClick={foo}>
+            Generate Heat Map
+          </button>
+          <button onClick={foo}>
+            Generate 3D Map
+          </button>
+          <br></br>
+          <hr></hr>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,102 @@
+[
+    {
+        "Base_Station_ID": "BS_Toronto",
+        "Latitude": 43.65107,
+        "Longitude": -79.347015,
+        "UEs": [
+            {
+                "UE_ID": "UE_Toronto_0",
+                "Latitude": 43.65,
+                "Longitude": -79.38
+            },
+            {
+                "UE_ID": "UE_Toronto_1",
+                "Latitude": 43.66,
+                "Longitude": -79.36
+            },
+            {
+                "UE_ID": "UE_Toronto_2",
+                "Latitude": 43.64,
+                "Longitude": -79.37
+            }
+        ]
+    },
+    {
+        "Base_Station_ID": "BS_Montreal",
+        "Latitude": 45.50169,
+        "Longitude": -73.567253,
+        "UEs": [
+            {
+                "UE_ID": "UE_Montreal_0",
+                "Latitude": 45.5,
+                "Longitude": -73.56
+            },
+            {
+                "UE_ID": "UE_Montreal_1",
+                "Latitude": 45.51,
+                "Longitude": -73.57
+            }
+        ]
+    },
+    {
+        "Base_Station_ID": "BS_Vancouver",
+        "Latitude": 49.28273,
+        "Longitude": -123.120735,
+        "UEs": [
+            {
+                "UE_ID": "UE_Vancouver_0",
+                "Latitude": 49.28,
+                "Longitude": -123.12
+            },
+            {
+                "UE_ID": "UE_Vancouver_1",
+                "Latitude": 49.27,
+                "Longitude": -123.13
+            }
+        ]
+    },
+    {
+        "Base_Station_ID": "BS_Calgary",
+        "Latitude": 51.044733,
+        "Longitude": -114.071883,
+        "UEs": [
+            {
+                "UE_ID": "UE_Calgary_0",
+                "Latitude": 51.04,
+                "Longitude": -114.07
+            },
+            {
+                "UE_ID": "UE_Calgary_1",
+                "Latitude": 51.05,
+                "Longitude": -114.08
+            }
+        ]
+    },
+    {
+        "Base_Station_ID": "BS_Ottawa",
+        "Latitude": 45.42153,
+        "Longitude": -75.697193,
+        "UEs": [
+            {
+                "UE_ID": "UE_Ottawa_0",
+                "Latitude": 45.42,
+                "Longitude": -75.69
+            },
+            {
+                "UE_ID": "UE_Ottawa_1",
+                "Latitude": 45.43,
+                "Longitude": -75.7
+            },
+            {
+                "UE_ID": "UE_Ottawa_2",
+                "Latitude": 45.44,
+                "Longitude": -75.68
+            },
+            {
+                "UE_ID": "UE_Ottawa_3",
+                "Latitude": 45.41,
+                "Longitude": -75.71
+            }
+        ]
+    }
+]
