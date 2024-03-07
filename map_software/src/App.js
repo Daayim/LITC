@@ -136,8 +136,8 @@ function App() {
 
 
   // Define the bounds for the image overlay
-  const deltaLat = 0.05; // Arbitrary small latitude delta for the image size
-  const deltaLng = 0.1; // Arbitrary small longitude delta for the image size
+  const deltaLat = 0.0125; // Arbitrary small latitude delta for the image size
+  const deltaLng = 0.025; // Arbitrary small longitude delta for the image size
   const imageBounds = [
     [defaultCenter[0] - deltaLat, defaultCenter[1] - deltaLng],
     [defaultCenter[0] + deltaLat, defaultCenter[1] + deltaLng]
