@@ -68,20 +68,28 @@ function App() {
   }
 
   function renderConnectionLine() {
-    if (!selectedUE || !selectedBaseStation) return null;
-    const polylinePoints = [
-      [selectedBaseStation.Latitude, selectedBaseStation.Longitude],
-      [selectedUE.Latitude, selectedUE.Longitude]
-    ];
+    if (!selectedBaseStation) return null;
+    return selectedBaseStation.UEs.map((ue, index) => {
+      const isSelectedUE = selectedUE && ue.UE_ID === selectedUE.UE_ID;
+      const polylineColor = isSelectedUE ? "red" : "gray";
+      const polylineWeight = isSelectedUE ? 4 : 4;
 
-    return (
-      <Polyline
-        positions={polylinePoints}
-        color="red"
-        dashArray="4"
-      />
-    );
+      return (
+        <Polyline
+          key={`${index}-${isSelectedUE ? 'selected' : 'not-selected'}`}
+          positions={[
+            [selectedBaseStation.Latitude, selectedBaseStation.Longitude],
+            [ue.Latitude, ue.Longitude]
+          ]}
+          color={polylineColor}
+          weight={polylineWeight}
+          dashArray="10"
+        />
+      );
+    });
   }
+
+
 
   //////////////////////////////////
   /*         Base Station         */
@@ -161,7 +169,9 @@ function App() {
     ];
   };
 
-
+  //////////////////////////////////
+  /*        Map Rendering         */
+  //////////////////////////////////
 
   return (
     <div className="App">
