@@ -45,8 +45,10 @@ function App() {
   function handleUEClick(ue) {
     if (selectedUE && selectedUE.UE_ID === ue.UE_ID) {
       setSelectedUE(null); // Deselect if the same UE is clicked
+      setShowPolarPlot(false);
     } else {
       setSelectedUE(ue); // Select the UE
+      setShowPolarPlot(false);
     }
   }
 
@@ -115,9 +117,11 @@ function App() {
     if (selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID) {
       setSelectedBaseStation(null); // Deselect if the same station is clicked
       setSelectedUE(null); // Also deselect any selected UE
+      setShowPolarPlot(false);
     } else {
       setSelectedBaseStation(station); // Select new station
       setSelectedUE(null); // Ensure no UE is selected when a new station is selected
+      setShowPolarPlot(false);
     }
   }
 
