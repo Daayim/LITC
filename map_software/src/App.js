@@ -4,7 +4,7 @@ import L from 'leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
 
-import baseStationData from './Canadian_Cities_Base_Stations_and_UEs.json';
+import baseStationData from './output.json';
 
 const defaultCenter = [45.4200, -75.6900];
 const defaultZoom = 8;
