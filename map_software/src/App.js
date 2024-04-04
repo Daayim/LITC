@@ -5,6 +5,7 @@ import './App.css';
 import 'leaflet/dist/leaflet.css';
 
 import baseStationData from './output_test.json';
+import DetailModal from './components/DetailModel';
 
 const defaultCenter = [45.4200, -75.6900];
 const defaultZoom = 8;
@@ -16,6 +17,7 @@ function App() {
   const [selectedUE, setSelectedUE] = useState(null);
   const [showPolarPlot, setShowPolarPlot] = useState(false);
   const [selectedPolyline, setSelectedPolyline] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     // Initialize base stations on component mount
@@ -100,7 +102,7 @@ function App() {
                 <p>ID: {ue.UE_ID}</p>
                 <p>Gain: {ue.Latitude}</p>
                 <p>Antenna Loss: {ue.Longitude}</p>
-                <button onClick={() => console.log('Open detailed view for UE:', ue.UE_ID)}>
+                <button onClick={() => setShowModal(true)}>
                   View Details
                 </button>
               </div>
@@ -110,6 +112,8 @@ function App() {
       );
     });
   }
+
+
 
 
 
@@ -199,14 +203,15 @@ function App() {
 
   return (
     <div className="App">
-      <MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom}>
+      <MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom} doubleClickZoom={false}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {selectedUE && showPolarPlot && <ImageOverlay url="/signal_power_distribution.png" bounds={getImageBounds()} />}
         {renderBaseStationMarkers()}
         {renderUEMarkers()}
         {renderConnectionLine()}
       </MapContainer>
-      <div className="sidebar">
+      {showModal && <DetailModal ue={selectedPolyline?.ue} baseStation={selectedPolyline?.baseStation} onClose={() => setShowModal(false)} />}
+      <div className="sidebar" style={{ border: '2px solid black' }}>
         <h2>LITC MAP Software</h2>
         <p>Frontend visualization tool for LITC Project.</p>
         <button onClick={fetchBSData}>Fetch Base Stations</button>
