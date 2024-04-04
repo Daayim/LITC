@@ -4,7 +4,7 @@ import L from 'leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
 
-import baseStationData from './output.json';
+import baseStationData from './output_test.json';
 
 const defaultCenter = [45.4200, -75.6900];
 const defaultZoom = 8;
@@ -15,10 +15,11 @@ function App() {
   const [selectedBaseStation, setSelectedBaseStation] = useState(null);
   const [selectedUE, setSelectedUE] = useState(null);
   const [showPolarPlot, setShowPolarPlot] = useState(false);
+  const [selectedPolyline, setSelectedPolyline] = useState(null);
 
   useEffect(() => {
     // Initialize base stations on component mount
-    setBaseStations(baseStationData);
+    // setBaseStations(baseStationData);
   }, []);
 
   const baseStationIcon = L.icon({ iconUrl: '/base_station_unclicked.png', iconSize: [50, 50] });
@@ -35,8 +36,6 @@ function App() {
       marker.setIcon(isHovering ? ueIconLarge : ueIcon);
     }
   }
-
-
 
   //////////////////////////////////
   /*        User Equipment        */
@@ -74,7 +73,7 @@ function App() {
     return selectedBaseStation.UEs.map((ue, index) => {
       const isSelectedUE = selectedUE && ue.UE_ID === selectedUE.UE_ID;
       const polylineColor = isSelectedUE ? "red" : "gray";
-      const polylineWeight = isSelectedUE ? 4 : 4;
+      const polylineWeight = isSelectedUE ? 6 : 4;
 
       return (
         <Polyline
@@ -86,7 +85,28 @@ function App() {
           color={polylineColor}
           weight={polylineWeight}
           dashArray="10"
-        />
+          eventHandlers={{
+            click: () => {
+              if (isSelectedUE) {
+                setSelectedPolyline({ baseStation: selectedBaseStation, ue });
+              }
+            },
+          }}
+        >
+          {selectedPolyline && selectedPolyline.ue.UE_ID === ue.UE_ID && (
+            <Popup>
+              <div>
+                <h3>BS|UE Details</h3>
+                <p>ID: {ue.UE_ID}</p>
+                <p>Gain: {ue.Latitude}</p>
+                <p>Antenna Loss: {ue.Longitude}</p>
+                <button onClick={() => console.log('Open detailed view for UE:', ue.UE_ID)}>
+                  View Details
+                </button>
+              </div>
+            </Popup>
+          )}
+        </Polyline>
       );
     });
   }
