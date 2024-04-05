@@ -1,101 +1,131 @@
 [
     {
-        "Base_Station_ID": "BS_Toronto",
-        "Latitude": 43.65107,
-        "Longitude": -79.347015,
+        "Base_Station_ID": "BS_Ottawa_1",
+        "Latitude": 45.4235,
+        "Longitude": -75.6976,
         "UEs": [
             {
-                "UE_ID": "UE_Toronto_0",
-                "Latitude": 43.65,
-                "Longitude": -79.38
+                "UE_ID": "UE_Ottawa_1_0",
+                "Latitude": 45.383,
+                "Longitude": -75.7205
             },
             {
-                "UE_ID": "UE_Toronto_1",
-                "Latitude": 43.66,
-                "Longitude": -79.36
+                "UE_ID": "UE_Ottawa_1_1",
+                "Latitude": 45.478,
+                "Longitude": -75.6945
             },
             {
-                "UE_ID": "UE_Toronto_2",
-                "Latitude": 43.64,
-                "Longitude": -79.37
+                "UE_ID": "UE_Ottawa_1_2",
+                "Latitude": 45.3925,
+                "Longitude": -75.6885
+            },
+            {
+                "UE_ID": "UE_Ottawa_1_3",
+                "Latitude": 45.428,
+                "Longitude": -75.6945
+            },
+            {
+                "UE_ID": "UE_Ottawa_1_4",
+                "Latitude": 45.3977,
+                "Longitude": -75.7002
             }
         ]
     },
     {
-        "Base_Station_ID": "BS_Montreal",
-        "Latitude": 45.50169,
-        "Longitude": -73.567253,
+        "Base_Station_ID": "BS_Ottawa_2",
+        "Latitude": 45.415,
+        "Longitude": -75.71,
         "UEs": [
             {
-                "UE_ID": "UE_Montreal_0",
-                "Latitude": 45.5,
-                "Longitude": -73.56
+                "UE_ID": "UE_Ottawa_2_0",
+                "Latitude": 45.434,
+                "Longitude": -75.7220
             },
             {
-                "UE_ID": "UE_Montreal_1",
-                "Latitude": 45.51,
-                "Longitude": -73.57
-            }
-        ]
-    },
-    {
-        "Base_Station_ID": "BS_Vancouver",
-        "Latitude": 49.28273,
-        "Longitude": -123.120735,
-        "UEs": [
-            {
-                "UE_ID": "UE_Vancouver_0",
-                "Latitude": 49.28,
-                "Longitude": -123.12
-            },
-            {
-                "UE_ID": "UE_Vancouver_1",
-                "Latitude": 49.27,
-                "Longitude": -123.13
-            }
-        ]
-    },
-    {
-        "Base_Station_ID": "BS_Calgary",
-        "Latitude": 51.044733,
-        "Longitude": -114.071883,
-        "UEs": [
-            {
-                "UE_ID": "UE_Calgary_0",
-                "Latitude": 51.04,
-                "Longitude": -114.07
-            },
-            {
-                "UE_ID": "UE_Calgary_1",
-                "Latitude": 51.05,
-                "Longitude": -114.08
-            }
-        ]
-    },
-    {
-        "Base_Station_ID": "BS_Ottawa",
-        "Latitude": 45.42153,
-        "Longitude": -75.697193,
-        "UEs": [
-            {
-                "UE_ID": "UE_Ottawa_0",
-                "Latitude": 45.42,
-                "Longitude": -75.69
-            },
-            {
-                "UE_ID": "UE_Ottawa_1",
-                "Latitude": 45.43,
+                "UE_ID": "UE_Ottawa_2_1",
+                "Latitude": 45.390,
                 "Longitude": -75.7
+            }
+        ]
+    },
+    {
+        "Base_Station_ID": "BS_Ottawa_3",
+        "Latitude": 45.435,
+        "Longitude": -75.685,
+        "UEs": [
+            {
+                "UE_ID": "UE_Ottawa_3_0",
+                "Latitude": 45.457,
+                "Longitude": -75.643
             },
             {
-                "UE_ID": "UE_Ottawa_2",
-                "Latitude": 45.44,
-                "Longitude": -75.68
+                "UE_ID": "UE_Ottawa_3_1",
+                "Latitude": 45.413,
+                "Longitude": -75.6571
             },
             {
-                "UE_ID": "UE_Ottawa_3",
-                "Latitude": 45.41,
-                "Longitude": -75.71
+                "UE_ID": "UE_Ottawa_3_2",
+                "Latitude": 45.384,
+                "Longitude": -75.6962
+            },
+            {
+                "UE_ID": "UE_Ottawa_3_3",
+                "Latitude": 45.419,
+                "Longitude": -75.7303
+            }
+        ]
+    },
+    {
+        "Base_Station_ID": "BS_Ottawa_4",
+        "Latitude": 45.4,
+        "Longitude": -75.72,
+        "UEs": [
+            {
+                "UE_ID": "UE_Ottawa_4_0",
+                "Latitude": 45.435,
+                "Longitude": -75.726
+            },
+            {
+                "UE_ID": "UE_Ottawa_4_1",
+                "Latitude": 45.392,
+                "Longitude": -75.7137
+            },
+            {
+                "UE_ID": "UE_Ottawa_4_2",
+                "Latitude": 45.424,
+                "Longitude": -75.7482
+            },
+            {
+                "UE_ID": "UE_Ottawa_4_3",
+                "Latitude": 45.451,
+                "Longitude": -75.7204
+            }
+        ]
+    },
+    {
+        "Base_Station_ID": "BS_Ottawa_0",
+        "Latitude": 45.45,
+        "Longitude": -75.68,
+        "UEs": [
+            {
+                "UE_ID": "UE_Ottawa_0_0",
+                "Latitude": 45.491,
+                "Longitude": -75.6816
+            },
+            {
+                "UE_ID": "UE_Ottawa_0_1",
+                "Latitude": 45.411,
+                "Longitude": -75.6827
+            },
+            {
+                "UE_ID": "UE_Ottawa_0_2",
+                "Latitude": 45.459,
+                "Longitude": -75.7028
+            },
+            {
+                "UE_ID": "UE_Ottawa_0_3",
+                "Latitude": 45.42,
+                "Longitude": -75.6649
             }
         ]
     }

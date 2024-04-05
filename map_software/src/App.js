@@ -18,6 +18,7 @@ function App() {
   const [showPolarPlot, setShowPolarPlot] = useState(false);
   const [selectedPolyline, setSelectedPolyline] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Initialize base stations on component mount
@@ -155,8 +156,11 @@ function App() {
   ///////////////////////////////////
 
   async function fetchBSData() {
-    // Directly set the imported data since you're not fetching from a remote source
-    setBaseStations(baseStationData);
+    setIsLoading(true); // Start loading
+    setTimeout(() => {
+      setBaseStations(baseStationData); // After 5 seconds, set the data
+      setIsLoading(false); // End loading
+    }, 0);
   }
 
   function clearMarkers() {
@@ -172,8 +176,8 @@ function App() {
 
 
   // Define the bounds for the image overlay
-  const deltaLat = 0.0125; // Arbitrary small latitude delta for the image size
-  const deltaLng = 0.025; // Arbitrary small longitude delta for the image size
+  const deltaLat = 0.00625; // Arbitrary small latitude delta for the image size
+  const deltaLng = 0.00825; // Arbitrary small longitude delta for the image size
   const imageBounds = [
     [defaultCenter[0] - deltaLat, defaultCenter[1] - deltaLng],
     [defaultCenter[0] + deltaLat, defaultCenter[1] + deltaLng]
@@ -182,6 +186,11 @@ function App() {
   function foo() {
     return;
   }
+
+  const Data3DVisualization = () => {
+    window.location.href = '/3D.html';
+  }
+
 
   function generatePolarPlot() {
     if (selectedUE != null) {
@@ -226,7 +235,7 @@ function App() {
           <button onClick={foo} disabled={!selectedUE}>
             Generate Heat Map
           </button>
-          <button onClick={foo} disabled={!selectedUE}>
+          <button onClick={Data3DVisualization} disabled={!selectedUE}>
             Generate 3D Map
           </button>
           <br></br>

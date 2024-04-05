@@ -39,7 +39,7 @@ const DetailModal = ({ ue, baseStation, onClose }) => {
             dataWindow.document.write(`
             <html>
                 <head>
-                    <title>${ue.UE_ID} Signal Antenna Data Table</title>
+                    <title>${ue.UE_ID} Antenna Signal Power Data Table</title>
                 </head>
                 <body>
                     <div style="display: flex; align-items: center;">
