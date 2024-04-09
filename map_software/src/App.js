@@ -4,13 +4,18 @@ import L from 'leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
 
-import baseStationData from './output_test.json';
-import DetailModal from './components/views/DetailModel';
+// Window Componenets
+import DetailModel from './components/views/DetailModel';
 import LoadingWindow from './components/views/LoadingWindow';
 import Sidebar from './components/views/Sidebar';
+
+// Marker Componenets
 import UEMarkers  from './components/markers/UEMarkers';
 import BaseStationMarkers  from './components/markers/BSMarkers';
 import ConnectionLines  from './components/markers/ConnectionLine';
+
+// S3 Data storage location
+import baseStationData from './storage/output_test.json';
 
 const defaultCenter = [45.4200, -75.6900];
 const defaultZoom = 8;
@@ -22,7 +27,7 @@ function App() {
   const [selectedUE, setSelectedUE] = useState(null);
   const [showPolarPlot, setShowPolarPlot] = useState(false);
   const [selectedPolyline, setSelectedPolyline] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showModel, setShowModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -155,11 +160,11 @@ function App() {
         selectedUE={selectedUE}
         setSelectedPolyline={setSelectedPolyline}
         selectedPolyline={selectedPolyline}
-        setShowModal={setShowModal}
+        setShowModel={setShowModel}
         />
         {isLoading && <LoadingWindow />}
       </MapContainer>
-      {showModal && <DetailModal ue={selectedPolyline?.ue} baseStation={selectedPolyline?.baseStation} onClose={() => setShowModal(false)} />}
+      {showModel && <DetailModel ue={selectedPolyline?.ue} baseStation={selectedPolyline?.baseStation} onClose={() => setShowModel(false)} />}
       <Sidebar
         baseStation={selectedBaseStation}
         userEquipment={selectedUE}

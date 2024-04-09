@@ -3,7 +3,7 @@
 import React from 'react';
 import { Polyline, Popup } from 'react-leaflet';
 
-const ConnectionLines = ({ selectedBaseStation, selectedUE,  setShowModal, setSelectedPolyline, selectedPolyline }) => {
+const ConnectionLines = ({ selectedBaseStation, selectedUE,  setShowModel, setSelectedPolyline, selectedPolyline }) => {
   if (!selectedBaseStation) return null;
 
   return selectedBaseStation.UEs.map((ue, index) => {
@@ -36,7 +36,7 @@ const ConnectionLines = ({ selectedBaseStation, selectedUE,  setShowModal, setSe
               <p>ID: {ue.UE_ID}</p>
               <p>Gain: {ue.Latitude}</p>
               <p>Antenna Loss: {ue.Longitude}</p>
-              <button onClick={() => setShowModal(true)}>
+              <button onClick={() => setShowModel(true)}>
                 View Details
               </button>
             </div>

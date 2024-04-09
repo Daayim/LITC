@@ -2,7 +2,7 @@
 import React from 'react';
 import './DetailModel.css';
 
-const DetailModal = ({ ue, baseStation, onClose }) => {
+const DetailModel = ({ ue, baseStation, onClose }) => {
     const openDataFile = async () => {
         if (!ue) return;
 
@@ -58,8 +58,8 @@ const DetailModal = ({ ue, baseStation, onClose }) => {
     };
 
     return (
-        <div className="modal-show" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="model-show" onClick={onClose}>
+            <div className="model-content" onClick={(e) => e.stopPropagation()}>
                 <h2>Detailed Information</h2>
                 {ue && baseStation ? (
                     <div>
@@ -84,4 +84,4 @@ const DetailModal = ({ ue, baseStation, onClose }) => {
     );
 };
 
-export default DetailModal;
+export default DetailModel;
