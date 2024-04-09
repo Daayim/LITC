@@ -5,9 +5,12 @@ import './App.css';
 import 'leaflet/dist/leaflet.css';
 
 import baseStationData from './output_test.json';
-import DetailModal from './components/DetailModel';
-import LoadingWindow from './components/LoadingWindow';
-import Sidebar from './components/Sidebar';
+import DetailModal from './components/views/DetailModel';
+import LoadingWindow from './components/views/LoadingWindow';
+import Sidebar from './components/views/Sidebar';
+import UEMarkers  from './components/markers/UEMarkers';
+import BaseStationMarkers  from './components/markers/BSMarkers';
+import ConnectionLines  from './components/markers/ConnectionLine';
 
 const defaultCenter = [45.4200, -75.6900];
 const defaultZoom = 8;
@@ -27,12 +30,12 @@ function App() {
     // setBaseStations(baseStationData);
   }, []);
 
-  const baseStationIcon = L.icon({ iconUrl: '/base_station_unclicked.png', iconSize: [50, 50] });
-  const baseStationIconLarge = L.icon({ iconUrl: '/base_station_unclicked.png', iconSize: [70, 70] });
-  const baseStationClickedIcon = L.icon({ iconUrl: '/base_station_clicked.png', iconSize: [50, 50] });
-  const baseStationClickedIconLarge = L.icon({ iconUrl: '/base_station_clicked.png', iconSize: [70, 70] });
-  const ueIcon = L.icon({ iconUrl: '/user_equipment.png', iconSize: [35, 35] });
-  const ueIconLarge = L.icon({ iconUrl: '/user_equipment.png', iconSize: [50, 50] });
+  const baseStationIcon = L.icon({ iconUrl: '/markerIcons/base_station_unclicked.png', iconSize: [50, 50] });
+  const baseStationIconLarge = L.icon({ iconUrl: '/markerIcons/base_station_unclicked.png', iconSize: [70, 70] });
+  const baseStationClickedIcon = L.icon({ iconUrl: '/markerIcons/base_station_clicked.png', iconSize: [50, 50] });
+  const baseStationClickedIconLarge = L.icon({ iconUrl: '/markerIcons/base_station_clicked.png', iconSize: [70, 70] });
+  const ueIcon = L.icon({ iconUrl: '/markerIcons/user_equipment.png', iconSize: [35, 35] });
+  const ueIconLarge = L.icon({ iconUrl: '/markerIcons/user_equipment.png', iconSize: [50, 50] });
 
   function toggleIconSize(marker, isHovering, isBaseStation, isSelected) {
     if (isBaseStation) {
@@ -43,7 +46,7 @@ function App() {
   }
 
   //////////////////////////////////
-  /*        User Equipment        */
+  /*         Handle Click         */
   //////////////////////////////////
 
   function handleUEClick(ue) {
@@ -54,88 +57,6 @@ function App() {
       setSelectedUE(ue); // Select the UE
       setShowPolarPlot(false);
     }
-  }
-
-  function renderUEMarkers() {
-    if (!selectedBaseStation) return null;
-    return selectedBaseStation.UEs.map((ue, index) => (
-      <Marker
-        key={index}
-        position={[ue.Latitude, ue.Longitude]}
-        icon={ueIcon}
-        eventHandlers={{
-          mouseover: (e) => toggleIconSize(e.target, true, false, false),
-          mouseout: (e) => toggleIconSize(e.target, false, false, false),
-          click: () => handleUEClick(ue),
-        }}
-      >
-      </Marker>
-    ));
-  }
-
-  function renderConnectionLine() {
-    if (!selectedBaseStation) return null;
-    return selectedBaseStation.UEs.map((ue, index) => {
-      const isSelectedUE = selectedUE && ue.UE_ID === selectedUE.UE_ID;
-      const polylineColor = isSelectedUE ? "red" : "gray";
-      const polylineWeight = isSelectedUE ? 6 : 4;
-
-      return (
-        <Polyline
-          key={`${index}-${isSelectedUE ? 'selected' : 'not-selected'}`}
-          positions={[
-            [selectedBaseStation.Latitude, selectedBaseStation.Longitude],
-            [ue.Latitude, ue.Longitude]
-          ]}
-          color={polylineColor}
-          weight={polylineWeight}
-          dashArray="10"
-          eventHandlers={{
-            click: () => {
-              if (isSelectedUE) {
-                setSelectedPolyline({ baseStation: selectedBaseStation, ue });
-              }
-            },
-          }}
-        >
-          {selectedPolyline && selectedPolyline.ue.UE_ID === ue.UE_ID && (
-            <Popup>
-              <div>
-                <h3>BS|UE Details</h3>
-                <p>ID: {ue.UE_ID}</p>
-                <p>Gain: {ue.Latitude}</p>
-                <p>Antenna Loss: {ue.Longitude}</p>
-                <button onClick={() => setShowModal(true)}>
-                  View Details
-                </button>
-              </div>
-            </Popup>
-          )}
-        </Polyline>
-      );
-    });
-  }
-
-
-
-  //////////////////////////////////
-  /*         Base Station         */
-  //////////////////////////////////
-
-  function renderBaseStationMarkers() {
-    return baseStations.map((station, index) => (
-      <Marker
-        key={index}
-        position={[station.Latitude, station.Longitude]}
-        icon={selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID ? baseStationClickedIcon : baseStationIcon}
-        eventHandlers={{
-          click: () => handleBaseStationClick(station),
-          mouseover: (e) => toggleIconSize(e.target, true, true, selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID),
-          mouseout: (e) => toggleIconSize(e.target, false, true, selectedBaseStation && selectedBaseStation.Base_Station_ID === station.Base_Station_ID),
-        }}
-      >
-      </Marker>
-    ));
   }
 
   function handleBaseStationClick(station) {
@@ -160,7 +81,7 @@ function App() {
     setTimeout(() => {
       setBaseStations(baseStationData); // After 5 seconds, set the data
       setIsLoading(false); // End loading
-    }, 5000);
+    }, 0);
   }
 
   function clearMarkers() {
@@ -215,9 +136,27 @@ function App() {
       <MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom} doubleClickZoom={false}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {selectedUE && showPolarPlot && <ImageOverlay url="/signal_power_distribution.png" bounds={getImageBounds()} />}
-        {renderBaseStationMarkers()}
-        {renderUEMarkers()}
-        {renderConnectionLine()}
+        <BaseStationMarkers
+          baseStations={baseStations}
+          selectedBaseStation={selectedBaseStation}
+          baseStationIcon={baseStationIcon}
+          baseStationClickedIcon={baseStationClickedIcon}
+          handleBaseStationClick={handleBaseStationClick}
+          toggleIconSize={toggleIconSize}
+        />
+        <UEMarkers
+          selectedBaseStation={selectedBaseStation}
+          ueIcon={ueIcon}
+          handleUEClick={handleUEClick}
+          toggleIconSize={toggleIconSize}
+        />
+        <ConnectionLines
+        selectedBaseStation={selectedBaseStation}
+        selectedUE={selectedUE}
+        setSelectedPolyline={setSelectedPolyline}
+        selectedPolyline={selectedPolyline}
+        setShowModal={setShowModal}
+        />
         {isLoading && <LoadingWindow />}
       </MapContainer>
       {showModal && <DetailModal ue={selectedPolyline?.ue} baseStation={selectedPolyline?.baseStation} onClose={() => setShowModal(false)} />}
