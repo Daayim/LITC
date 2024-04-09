@@ -1,6 +1,5 @@
 import json
 
-# Assuming the JSON is read from 'input.json' and will be written to 'output.json'
 input_file = 'snapshot_v1.json'
 output_file = 'output.json'
 
@@ -34,14 +33,11 @@ def transform_data(input_data):
     
     return output_data
 
-# Read the input JSON file
 with open(input_file, 'r') as file:
     input_json = json.load(file)
 
-# Transform the data
 transformed_data = transform_data(input_json)
 
-# Write the transformed data to the output JSON file
 with open(output_file, 'w') as file:
     json.dump(transformed_data, file, indent=4)
 

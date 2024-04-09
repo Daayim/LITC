@@ -1,5 +1,6 @@
 // DetailedModel.jsx
 import React from 'react';
+import './DetailModel.css';
 
 const DetailModal = ({ ue, baseStation, onClose }) => {
     const openDataFile = async () => {
@@ -57,11 +58,11 @@ const DetailModal = ({ ue, baseStation, onClose }) => {
     };
 
     return (
-        <div className="modal show" onClick={onClose} style={{ border: '2px solid black' }}>
+        <div className="modal-show" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <h2>Detailed Information</h2>
                 {ue && baseStation ? (
-                    <div style={{ textAlign: 'left', marginLeft: '10px' }}>
+                    <div>
                         <h3>Base Station Details</h3>
                         <p>ID: {baseStation.Base_Station_ID}</p>
                         <p>Latitude: {baseStation.Latitude}</p>

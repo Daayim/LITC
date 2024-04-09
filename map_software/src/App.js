@@ -220,7 +220,6 @@ function App() {
         {renderConnectionLine()}
         {isLoading && <LoadingWindow />}
       </MapContainer>
-      
       {showModal && <DetailModal ue={selectedPolyline?.ue} baseStation={selectedPolyline?.baseStation} onClose={() => setShowModal(false)} />}
       <Sidebar
         baseStation={selectedBaseStation}

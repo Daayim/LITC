@@ -1,0 +1,9 @@
+
+.modal-show {
+    border: 2px solid black;
+  }
+  
+  .modal-content div {
+    text-align: left;
+    margin-left: 10px;
+  }

@@ -43,25 +43,3 @@
   width: 70vw;
   height: 100vh;
 }
-
-.sidebar {
-  box-sizing: border-box;
-  padding: 2em;
-  width: 30vw;
-}
-
-.sidebar h2,
-.sidebar p,
-.sidebar ul {
-  text-align: center;
-}
-
-.sidebar h2 {
-  margin-top: 0;
-}
-
-.sidebar button {
-  width: 100%;
-  font-weight: bold;
-  padding: .8em 1em;
-}

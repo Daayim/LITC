@@ -1,6 +1,7 @@
 // Sidebar.jsx
 
 import React from 'react';
+import './Sidebar.css';
 
 function Sidebar({ baseStation, userEquipment, fetchBaseStations, clearMarkers, generatePolarPlot, generateHeatMap, Data3DVisualization }) {
   return (
