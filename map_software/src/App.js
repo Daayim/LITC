@@ -1,3 +1,5 @@
+// App.jsx
+
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, ImageOverlay } from 'react-leaflet';
 import L from 'leaflet';
@@ -31,9 +33,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Initialize base stations on component mount
+    // Initialize a component state on first render
     // setBaseStations(baseStationData);
   }, []);
+
+
+  //////////////////////////////////
+  /*            Icons             */
+  //////////////////////////////////
 
   const baseStationIcon = L.icon({ iconUrl: '/markerIcons/base_station_unclicked.png', iconSize: [50, 50] });
   const baseStationIconLarge = L.icon({ iconUrl: '/markerIcons/base_station_unclicked.png', iconSize: [70, 70] });
@@ -51,7 +58,7 @@ function App() {
   }
 
   //////////////////////////////////
-  /*         Handle Click         */
+  /*         Marker Click         */
   //////////////////////////////////
 
   function handleUEClick(ue) {
