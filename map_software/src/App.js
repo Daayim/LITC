@@ -6,6 +6,8 @@ import 'leaflet/dist/leaflet.css';
 
 import baseStationData from './output_test.json';
 import DetailModal from './components/DetailModel';
+import LoadingWindow from './components/LoadingWindow';
+import Sidebar from './components/Sidebar';
 
 const defaultCenter = [45.4200, -75.6900];
 const defaultZoom = 8;
@@ -116,8 +118,6 @@ function App() {
 
 
 
-
-
   //////////////////////////////////
   /*         Base Station         */
   //////////////////////////////////
@@ -160,7 +160,7 @@ function App() {
     setTimeout(() => {
       setBaseStations(baseStationData); // After 5 seconds, set the data
       setIsLoading(false); // End loading
-    }, 0);
+    }, 5000);
   }
 
   function clearMarkers() {
@@ -183,7 +183,7 @@ function App() {
     [defaultCenter[0] + deltaLat, defaultCenter[1] + deltaLng]
   ];
 
-  function foo() {
+  function generateHeatMap() {
     return;
   }
 
@@ -218,37 +218,20 @@ function App() {
         {renderBaseStationMarkers()}
         {renderUEMarkers()}
         {renderConnectionLine()}
+        {isLoading && <LoadingWindow />}
       </MapContainer>
+      
       {showModal && <DetailModal ue={selectedPolyline?.ue} baseStation={selectedPolyline?.baseStation} onClose={() => setShowModal(false)} />}
-      <div className="sidebar" style={{ border: '2px solid black' }}>
-        <h2>LITC MAP Software</h2>
-        <p>Frontend visualization tool for LITC Project.</p>
-        <button onClick={fetchBSData}>Fetch Base Stations</button>
-        <button onClick={clearMarkers}>Clear Markers</button>
-        <hr></hr>
-        <h3>Data visualization</h3>
-        <p>Display selected UE data and generate plots.</p>
-        <p>
-          <button onClick={generatePolarPlot} disabled={!selectedUE}>
-            Generate Polar Plot
-          </button>
-          <button onClick={foo} disabled={!selectedUE}>
-            Generate Heat Map
-          </button>
-          <button onClick={Data3DVisualization} disabled={!selectedUE}>
-            Generate 3D Map
-          </button>
-          <br></br>
-          <hr></hr>
-        </p>
-        <div>
-          <h3>Selected Base Station</h3>
-          <p>{selectedBaseStation ? selectedBaseStation.Base_Station_ID : "None"}</p>
-          <h3>Selected UE</h3>
-          <p>{selectedUE ? selectedUE.UE_ID : "None"}</p>
-        </div>
-      </div>
-    </div>
+      <Sidebar
+        baseStation={selectedBaseStation}
+        userEquipment={selectedUE}
+        fetchBaseStations={fetchBSData}
+        clearMarkers={clearMarkers}
+        generatePolarPlot={generatePolarPlot}
+        generateHeatMap={generateHeatMap}
+        Data3DVisualization={Data3DVisualization}
+      />
+</div>
   );
 }
 

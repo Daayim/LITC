@@ -1,3 +1,4 @@
+// DetailedModel.jsx
 import React from 'react';
 
 const DetailModal = ({ ue, baseStation, onClose }) => {

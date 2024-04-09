@@ -108,22 +108,22 @@
         "Longitude": -75.68,
         "UEs": [
             {
-                "UE_ID": "UE_Ottawa_0_0",
+                "UE_ID": "UE_Ottawa_0",
                 "Latitude": 45.491,
                 "Longitude": -75.6816
             },
             {
-                "UE_ID": "UE_Ottawa_0_1",
+                "UE_ID": "UE_Ottawa_1",
                 "Latitude": 45.411,
                 "Longitude": -75.6827
             },
             {
-                "UE_ID": "UE_Ottawa_0_2",
+                "UE_ID": "UE_Ottawa_2",
                 "Latitude": 45.459,
                 "Longitude": -75.7028
             },
             {
-                "UE_ID": "UE_Ottawa_0_3",
+                "UE_ID": "UE_Ottawa_3",
                 "Latitude": 45.42,
                 "Longitude": -75.6649
             }
