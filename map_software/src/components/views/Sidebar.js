@@ -3,7 +3,7 @@
 import React from 'react';
 import './Sidebar.css';
 
-function Sidebar({ baseStation, userEquipment, fetchBaseStations, clearMarkers, generatePolarPlot, generateHeatMap, Data3DVisualization }) {
+function Sidebar({ baseStation, userEquipment, setShowModel, fetchBaseStations, clearMarkers, generatePolarPlot, generateHeatMap, Data3DVisualization }) {
   return (
     <div className="sidebar" style={{ border: '2px solid black' }}>
       <h2>LITC MAP Software</h2>
@@ -29,6 +29,9 @@ function Sidebar({ baseStation, userEquipment, fetchBaseStations, clearMarkers, 
       <div>
         <h3>Selected Base Station</h3>
         <p>{baseStation ? baseStation.Base_Station_ID : "None"}</p>
+        <button onClick={() => setShowModel(true)} disabled={!baseStation}>
+                View Details
+        </button>
         <h3>Selected UE</h3>
         <p>{userEquipment ? userEquipment.UE_ID : "None"}</p>
       </div>

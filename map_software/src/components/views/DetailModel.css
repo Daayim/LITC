@@ -1,9 +1,14 @@
+/* DetailModel.css */
 
 .model-show {
     border: 2px solid black;
   }
   
-  .model-content div {
+
+.model-content {
+  width: 300px; 
+}
+.model-content div {
     text-align: left;
     margin-left: 10px;
-  }
+}

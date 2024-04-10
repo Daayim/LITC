@@ -65,6 +65,7 @@ function App() {
     if (selectedUE && selectedUE.UE_ID === ue.UE_ID) {
       setSelectedUE(null); // Deselect if the same UE is clicked
       setShowPolarPlot(false);
+      
     } else {
       setSelectedUE(ue); // Select the UE
       setShowPolarPlot(false);
@@ -76,6 +77,7 @@ function App() {
       setSelectedBaseStation(null); // Deselect if the same station is clicked
       setSelectedUE(null); // Also deselect any selected UE
       setShowPolarPlot(false);
+      
     } else {
       setSelectedBaseStation(station); // Select new station
       setSelectedUE(null); // Ensure no UE is selected when a new station is selected
@@ -101,6 +103,8 @@ function App() {
     setSelectedBaseStation(null);
     setSelectedUE(null);
     setShowPolarPlot(null);
+    setShowModel(null);
+    setSelectedPolyline(null);
   }
 
   //////////////////////////////////
@@ -171,7 +175,7 @@ function App() {
         />
         {isLoading && <LoadingWindow />}
       </MapContainer>
-      {showModel && <DetailModel ue={selectedPolyline?.ue} baseStation={selectedPolyline?.baseStation} onClose={() => setShowModel(false)} />}
+      {showModel && <DetailModel ue={selectedUE} baseStation={selectedBaseStation} onClose={() => setShowModel(false)} />}
       <Sidebar
         baseStation={selectedBaseStation}
         userEquipment={selectedUE}
@@ -180,6 +184,7 @@ function App() {
         generatePolarPlot={generatePolarPlot}
         generateHeatMap={generateHeatMap}
         Data3DVisualization={Data3DVisualization}
+        setShowModel={setShowModel}
       />
 </div>
   );

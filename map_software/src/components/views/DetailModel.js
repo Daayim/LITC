@@ -61,22 +61,26 @@ const DetailModel = ({ ue, baseStation, onClose }) => {
         <div className="model-show" onClick={onClose}>
             <div className="model-content" onClick={(e) => e.stopPropagation()}>
                 <h2>Detailed Information</h2>
-                {ue && baseStation ? (
+                {baseStation && (
                     <div>
                         <h3>Base Station Details</h3>
                         <p>ID: {baseStation.Base_Station_ID}</p>
                         <p>Latitude: {baseStation.Latitude}</p>
                         <p>Longitude: {baseStation.Longitude}</p>
+                    </div>
+                )}
+                {ue && (
+                    <div>
                         <h3>UE Details</h3>
                         <p>ID: {ue.UE_ID}</p>
                         <p>Gain: {ue.Latitude} (Placeholder for Gain)</p>
-                        <p>Antenna Loss: {ue.Longitude} (Placeholder for Antenna Loss)</p>
-
+                        <p>Antenna Loss: {ue.Longitude} (Placeholder for Antenna Loss)</p>       
                     </div>
-                ) : (
-                    <p>No data available</p>
                 )}
-                <button onClick={openDataFile}>Open Data File</button>
+                {!baseStation && !ue && (
+                    <p>No data available</p>
+                ) }
+                <button onClick={openDataFile} disabled={!ue}>Open Data File</button>
                 <br></br>
                 <button onClick={onClose}>Close</button>
             </div>

@@ -31,12 +31,15 @@ const ConnectionLines = ({ selectedBaseStation, selectedUE,  setShowModel, setSe
       >
         {selectedPolyline && selectedPolyline.ue.UE_ID === ue.UE_ID && (
           <Popup>
-            <div>
+            <div style={{ textAlign: 'left' }}>
               <h3>BS|UE Details</h3>
-              <p>ID: {ue.UE_ID}</p>
-              <p>Gain: {ue.Latitude}</p>
-              <p>Antenna Loss: {ue.Longitude}</p>
-              <button onClick={() => setShowModel(true)}>
+              <p style={{ margin: '0' }}>ID: {ue.UE_ID}</p>
+              <p style={{ margin: '0' }}>Gain: {ue.Latitude}</p>
+              <p style={{ margin: '0' }}>Antenna Loss: {ue.Longitude}</p>
+              <br></br>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+            <button nClick={() => setShowModel(true)}>
                 View Details
               </button>
             </div>
