@@ -7,8 +7,6 @@ import AWS from 'aws-sdk';
 // Look here for documentation https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 AWS.config.update({
     region: 'ca-central-1',
-    AWS_ACCESS_KEY_ID: 'AWS_ACCESS_KEY_ID',
-    AWS_SECRET_ACCESS_KEY: 'cSsQAKFUCB3/jEC48uiv/b7NJ3RZabb5SDSn0lHQ'
 });
 
 const s3 = new AWS.S3();
