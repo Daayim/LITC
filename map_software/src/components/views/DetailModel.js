@@ -2,7 +2,7 @@
 import React from 'react';
 import './DetailModel.css';
 
-const DetailModel = ({ ue, baseStation, onClose }) => {
+const DetailModel = ({ ue, baseStation, onClose, viewMode }) => {
     const openDataFile = async () => {
         if (!ue) return;
 
@@ -61,7 +61,7 @@ const DetailModel = ({ ue, baseStation, onClose }) => {
         <div className="model-show" onClick={onClose}>
             <div className="model-content" onClick={(e) => e.stopPropagation()}>
                 <h2>Detailed Information</h2>
-                {baseStation && (
+                {viewMode === "BS"  && baseStation && (
                     <div>
                         <h3>Base Station Details</h3>
                         <p>ID: {baseStation.Base_Station_ID}</p>
@@ -69,7 +69,7 @@ const DetailModel = ({ ue, baseStation, onClose }) => {
                         <p>Longitude: {baseStation.Longitude}</p>
                     </div>
                 )}
-                {ue && (
+                {viewMode === "UE" && ue && (
                     <div>
                         <h3>UE Details</h3>
                         <p>ID: {ue.UE_ID}</p>
@@ -77,10 +77,21 @@ const DetailModel = ({ ue, baseStation, onClose }) => {
                         <p>Antenna Loss: {ue.Longitude} (Placeholder for Antenna Loss)</p>       
                     </div>
                 )}
+                {viewMode === "Connection" && baseStation && ue && (
+                    <div>
+                        <h3>Connection Details</h3>
+                        <p>Base Station ID: {baseStation.Base_Station_ID}</p>
+                        <p>UE ID: {ue.UE_ID}</p>
+                    </div>
+                )}
                 {!baseStation && !ue && (
                     <p>No data available</p>
-                ) }
-                <button onClick={openDataFile} disabled={!ue}>Open Data File</button>
+                )}
+                {ue && viewMode === "UE" && (
+                    <>
+                        <button onClick={openDataFile}>Open Data File</button>
+                    </>
+                )}
                 <br></br>
                 <button onClick={onClose}>Close</button>
             </div>

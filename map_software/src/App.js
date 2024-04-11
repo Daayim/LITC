@@ -31,6 +31,7 @@ function App() {
   const [selectedPolyline, setSelectedPolyline] = useState(null);
   const [showModel, setShowModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [viewMode, setViewMode] = useState('BS'); 
 
   useEffect(() => {
     // Initialize a component state on first render
@@ -65,6 +66,7 @@ function App() {
     if (selectedUE && selectedUE.UE_ID === ue.UE_ID) {
       setSelectedUE(null); // Deselect if the same UE is clicked
       setShowPolarPlot(false);
+      setViewMode("BS");
       
     } else {
       setSelectedUE(ue); // Select the UE
@@ -82,6 +84,7 @@ function App() {
       setSelectedBaseStation(station); // Select new station
       setSelectedUE(null); // Ensure no UE is selected when a new station is selected
       setShowPolarPlot(false);
+      setViewMode("BS");
     }
   }
 
@@ -172,10 +175,11 @@ function App() {
         setSelectedPolyline={setSelectedPolyline}
         selectedPolyline={selectedPolyline}
         setShowModel={setShowModel}
+        setViewMode={setViewMode}
         />
         {isLoading && <LoadingWindow />}
       </MapContainer>
-      {showModel && <DetailModel ue={selectedUE} baseStation={selectedBaseStation} onClose={() => setShowModel(false)} />}
+      {showModel && <DetailModel ue={selectedUE} baseStation={selectedBaseStation} onClose={() => setShowModel(false)} viewMode={viewMode} />}
       <Sidebar
         baseStation={selectedBaseStation}
         userEquipment={selectedUE}
@@ -185,6 +189,7 @@ function App() {
         generateHeatMap={generateHeatMap}
         Data3DVisualization={Data3DVisualization}
         setShowModel={setShowModel}
+        setViewMode={setViewMode}
       />
 </div>
   );
