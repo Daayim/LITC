@@ -7,7 +7,7 @@ const DetailModel = ({ ue, baseStation, onClose, viewMode }) => {
         if (!ue) return;
 
         try {
-            const response = await fetch(`/${ue.UE_ID}.csv`);
+            const response = await fetch(`/${ue.UE_ID}.csv`); // Switch as API request GET or S3 csv file retrieval
             if (!response.ok) throw new Error('Network response was not ok');
             const csvText = await response.text();
 

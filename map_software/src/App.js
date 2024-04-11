@@ -1,7 +1,7 @@
 // App.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Polyline, ImageOverlay } from 'react-leaflet';
+import { MapContainer, TileLayer, ImageOverlay } from 'react-leaflet';
 import L from 'leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
@@ -16,8 +16,8 @@ import UEMarkers  from './components/markers/UEMarkers';
 import BaseStationMarkers  from './components/markers/BSMarkers';
 import ConnectionLines  from './components/markers/ConnectionLine';
 
-// S3 Data storage location
-import baseStationData from './storage/output_test.json';
+// S3 Data storage retrieval
+import { fetchBSData } from './storage/fetchData';
 
 const defaultCenter = [45.4200, -75.6900];
 const defaultZoom = 8;
@@ -93,13 +93,9 @@ function App() {
   /* Fetching and Clearing Markers */
   ///////////////////////////////////
 
-  async function fetchBSData() {
-    setIsLoading(true); // Start loading
-    setTimeout(() => {
-      setBaseStations(baseStationData); // After 5 seconds, set the data
-      setIsLoading(false); // End loading
-    }, 1500);
-  }
+  const handleFetchDataClick = () => {
+    fetchBSData(setBaseStations, setIsLoading);
+  };
 
   function clearMarkers() {
     setBaseStations([]);
@@ -183,7 +179,7 @@ function App() {
       <Sidebar
         baseStation={selectedBaseStation}
         userEquipment={selectedUE}
-        fetchBaseStations={fetchBSData}
+        fetchBaseStations={handleFetchDataClick}
         clearMarkers={clearMarkers}
         generatePolarPlot={generatePolarPlot}
         generateHeatMap={generateHeatMap}

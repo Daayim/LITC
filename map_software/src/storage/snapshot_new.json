@@ -1,0 +1,538 @@
+{
+  "IAS": {
+    "System": {
+      "simulation": "LBA",
+      "num_snapshots": "1",
+      "seed": "101",
+      "snapshot_seed": "202",
+      "enable_cochannel": "false",
+      "enable_adjacent_channel": "true",
+      "networks": [
+        {
+          "status": "Interferer",
+          "id": "i-1",
+          "network": {
+            "IMT": {
+              "frequency_dl": 17450.0,
+              "bandwidth_dl": 100.0,
+              "frequency_ul": 17450.0,
+              "bandwidth_ul": 100.0,
+              "deployment": {
+                "topology": "Macrocell",
+                "Macrocell": { "num_tiers": 0, "type_IMT": "Macro_3GPP_Tri" },
+                "location_origin": {
+                  "type": "Lon-Lat",
+                  "altitude": 0.0,
+                  "latitude": 45.41,
+                  "longitude": -75.69812
+                },
+                "inter_site_distance": 200.0,
+                "active_ue_per_bs": 3,
+                "ue_distribution": "UNIFORM",
+                "min_bs_ue": 10.0,
+                "num_ue_per_sector": 1,
+                "BS": [
+                  {
+                    "location": {
+                      "type": "Lon-Lat",
+                      "longitude": -75.69812,
+                      "latitude": 45.41,
+                      "altitude": 0.0
+                    }
+                  }
+                ]
+              },
+              "propagation": { "path_loss": "Free Space" },
+              "UE": [
+                {
+                  "location": {
+                    "type": "Lon-Lat",
+                    "longitude": -75.6981373334,
+                    "latitude": 45.4100361972
+                  },
+                  "pos_x": 39.7440433929,
+                  "pos_y": 80.6897405086,
+                  "tx": {
+                    "PowerBm": 43.0,
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "AzimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 2,
+                          "nv": 2,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.5,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 5.0,
+                          "azimuth_3db": 65.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "rx": {
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "azimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 2,
+                          "nv": 2,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.5,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 5.0,
+                          "azimuth_3db": 65.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "base_station_id": 0,
+                  "sector_id": 0
+                },
+                {
+                  "location": {
+                    "type": "Lon-Lat",
+                    "longitude": -75.6981210942,
+                    "latitude": 45.4100279502
+                  },
+                  "pos_x": -14.8804064587,
+                  "pos_y": 28.6111461849,
+                  "tx": {
+                    "PowerBm": 43.0,
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "AzimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 2,
+                          "nv": 2,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.5,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 5.0,
+                          "azimuth_3db": 65.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "rx": {
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "azimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 2,
+                          "nv": 2,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.5,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 5.0,
+                          "azimuth_3db": 65.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "base_station_id": 0,
+                  "sector_id": 1
+                },
+                {
+                  "location": {
+                    "type": "Lon-Lat",
+                    "longitude": -75.6981225016,
+                    "latitude": 45.4099679105
+                  },
+                  "pos_x": 31.0174767693,
+                  "pos_y": -22.5457444152,
+                  "tx": {
+                    "PowerBm": 43.0,
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "AzimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 2,
+                          "nv": 2,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.5,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 5.0,
+                          "azimuth_3db": 65.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "rx": {
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "azimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 2,
+                          "nv": 2,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.5,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 5.0,
+                          "azimuth_3db": 65.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "base_station_id": 0,
+                  "sector_id": 2
+                }
+              ],
+              "BS": [
+                {
+                  "status": "interferer",
+                  "num_sector": "3",
+                  "sector_pt_degree": "30 150 270",
+                  "emission_mask": "TBD",
+                  "selectivity": "TBD",
+                  "tx": {
+                    "PowerBm": 45.0,
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "AzimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 8,
+                          "nv": 8,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.7,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 6.4,
+                          "azimuth_3db": 90.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "rx": {
+                    "height": 1.5,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 2.0,
+                    "azimuthOffset": 2.0,
+                    "sectorAngle": 0.0,
+                    "antenna": {
+                      "type": "IMT",
+                      "para": {
+                        "array": {
+                          "nh": 8,
+                          "nv": 8,
+                          "h_spacing": 0.5,
+                          "v_spacing": 0.7,
+                          "v_tilt": 0.0
+                        },
+                        "element": {
+                          "peak_gain": 6.4,
+                          "azimuth_3db": 90.0,
+                          "elevation_3db": 65.0,
+                          "Am": 30.0,
+                          "SLAv": 30.0
+                        }
+                      }
+                    }
+                  },
+                  "pos_x": 0.0,
+                  "pos_y": 0.0,
+                  "sector_pt_deg": ["30", "150", "270"],
+                  "base_station_id": 0
+                }
+              ],
+              "Sector": [
+                {
+                  "pos_x": 57.735026919,
+                  "pos_y": 33.3333333333,
+                  "polygon": [
+                    [
+                      124.4016935856, 91.0683602523, 24.4016935856,
+                      -8.9316397477, 24.4016935856, 91.0683602523
+                    ],
+                    [
+                      33.3333333333, 91.0683602523, 91.0683602523,
+                      33.3333333333, -24.4016935856, -24.4016935856
+                    ]
+                  ],
+                  "sector_radius": 133.3333333333,
+                  "hexagon_radius": 66.6666666667,
+                  "ue_min_distance": 10.0,
+                  "ue_distribution": "UNIFORM",
+                  "num_ue_per_sector": 1,
+                  "tx": {
+                    "tx_power": 40,
+                    "azimuthPointing": 1,
+                    "tilt": -3,
+                    "AzimuthOffset": 2,
+                    "sectorAngle": 30,
+                    "height": 30,
+                    "antenna": { "type": "tbd" }
+                  },
+                  "rx": {
+                    "azimuthPointing": 0,
+                    "tilt": -3,
+                    "AzimuthOffset": 2,
+                    "sectorAngle": 30,
+                    "height": 30,
+                    "antenna": { "type": "tbd" }
+                  },
+                  "base_station_id": 0,
+                  "sector_id": 0
+                },
+                {
+                  "pos_x": 0.0,
+                  "pos_y": 66.6666666667,
+                  "polygon": [
+                    [
+                      66.6666666667, 33.3333333333, -33.3333333333,
+                      -66.6666666667, -33.3333333333, 33.3333333333
+                    ],
+                    [
+                      66.6666666667, 124.4016935856, 124.4016935856,
+                      66.6666666667, 8.9316397477, 8.9316397477
+                    ]
+                  ],
+                  "sector_radius": 133.3333333333,
+                  "hexagon_radius": 66.6666666667,
+                  "ue_min_distance": 10.0,
+                  "ue_distribution": "UNIFORM",
+                  "num_ue_per_sector": 1,
+                  "tx": {
+                    "tx_power": 40,
+                    "azimuthPointing": 1,
+                    "tilt": -3,
+                    "AzimuthOffset": 2,
+                    "sectorAngle": 150,
+                    "height": 30,
+                    "antenna": { "type": "tbd" }
+                  },
+                  "rx": {
+                    "azimuthPointing": 0,
+                    "tilt": -3,
+                    "AzimuthOffset": 2,
+                    "sectorAngle": 150,
+                    "height": 30,
+                    "antenna": { "type": "tbd" }
+                  },
+                  "base_station_id": 0,
+                  "sector_id": 1
+                },
+                {
+                  "pos_x": -0.0,
+                  "pos_y": -0.0,
+                  "polygon": [
+                    [
+                      66.6666666667, 33.3333333333, -33.3333333333,
+                      -66.6666666667, -33.3333333333, 33.3333333333
+                    ],
+                    [
+                      -0.0, 57.735026919, 57.735026919, -0.0, -57.735026919,
+                      -57.735026919
+                    ]
+                  ],
+                  "sector_radius": 133.3333333333,
+                  "hexagon_radius": 66.6666666667,
+                  "ue_min_distance": 10.0,
+                  "ue_distribution": "UNIFORM",
+                  "num_ue_per_sector": 1,
+                  "tx": {
+                    "tx_power": 40,
+                    "azimuthPointing": 1,
+                    "tilt": -3,
+                    "AzimuthOffset": 2,
+                    "sectorAngle": 270,
+                    "height": 30,
+                    "antenna": { "type": "tbd" }
+                  },
+                  "rx": {
+                    "azimuthPointing": 0,
+                    "tilt": -3,
+                    "AzimuthOffset": 2,
+                    "sectorAngle": 270,
+                    "height": 30,
+                    "antenna": { "type": "tbd" }
+                  },
+                  "base_station_id": 0,
+                  "sector_id": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "status": "Victim",
+          "id": "v-1",
+          "network": {
+            "FSS": {
+              "frequency_dl": 17250.0,
+              "bandwidth_dl": 100.0,
+              "frequency_ul": 17250.0,
+              "bandwidth_ul": 100.0,
+              "deployment": {
+                "location_origin": {
+                  "type": "Lon-Lat",
+                  "altitude": 0.0,
+                  "latitude": 49.0,
+                  "longitude": 17250.0
+                },
+                "location_satellite": [
+                  {
+                    "name": "Space Station",
+                    "location": {
+                      "type": "Lon-Lat",
+                      "altitude": 35786000.0,
+                      "latitude": 45.42,
+                      "longitude": -75.7
+                    }
+                  }
+                ],
+                "location_earth_station": [
+                  {
+                    "name": "Earth Station",
+                    "location": {
+                      "type": "Lon-Lat",
+                      "altitude": 0.0,
+                      "latitude": 45.42,
+                      "longitude": -75.7
+                    }
+                  }
+                ]
+              },
+              "propagation": { "path_loss": "Free Space" },
+              "SS": [
+                {
+                  "name": "Space Station",
+                  "status": "none",
+                  "emission_mask": "TBD",
+                  "selectivity": "TBD",
+                  "tx": {
+                    "PowerBm": 75.0,
+                    "height": 35786000.0,
+                    "azimuthPointing": 0,
+                    "elevationPointing": 0,
+                    "tilt": -90.0,
+                    "AzimuthOffset": 0.0,
+                    "sectorAngle": 0.0,
+                    "antenna": { "type": "S1428", "para": { "diameter": 0.48 } }
+                  },
+                  "rx": {
+                    "height": 35786000.0,
+                    "azimuthPointing": 0,
+                    "elevationPointing": 0,
+                    "tilt": -90.0,
+                    "azimuthOffset": 0.0,
+                    "sectorAngle": 0.0,
+                    "antenna": { "type": "S1428", "para": { "diameter": 0.48 } }
+                  },
+                  "pos_x": null,
+                  "pos_y": null
+                }
+              ],
+              "ES": [
+                {
+                  "name": "Earth Station",
+                  "status": "victim",
+                  "noise_temperature": 950.0,
+                  "emission_mask": "TBD",
+                  "selectivity": "TBD",
+                  "rx": {
+                    "height": 20.0,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 0.0,
+                    "azimuthOffset": 0.0,
+                    "sectorAngle": 0.0,
+                    "antenna": { "type": "S1428", "para": { "diameter": 0.48 } }
+                  },
+                  "tx": {
+                    "PowerBm": 75.0,
+                    "height": 20.0,
+                    "azimuthPointing": 1,
+                    "elevationPointing": 1,
+                    "tilt": 0.0,
+                    "AzimuthOffset": 0.0,
+                    "sectorAngle": 0.0,
+                    "antenna": { "type": "S1428", "para": { "diameter": 0.48 } }
+                  },
+                  "pos_x": null,
+                  "pos_y": null
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

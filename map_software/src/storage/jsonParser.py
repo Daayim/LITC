@@ -1,11 +1,11 @@
 import json
 
-input_file = 'snapshot_v1.json'
+input_file = 'snapshot_new.json'
 output_file = 'output.json'
 
 def transform_data(input_data):
     output_data = []
-    for network in input_data['IAS']['networks']:
+    for network in input_data['IAS']['System']['networks']:
         if 'IMT' in network['network']:
             bs_data = network['network']['IMT']['deployment']['BS']
             ue_data = network['network']['IMT']['UE']
@@ -20,8 +20,8 @@ def transform_data(input_data):
                 for j, ue in enumerate(ue_list):
                     ue_output.append({
                         "UE_ID": f"UE_{i}_{j}",
-                        "Latitude": ue['pos_x'],  # Placeholder, needs conversion
-                        "Longitude": ue['pos_y']  # Placeholder, needs conversion
+                        "Latitude": ue['location']['latitude'],  
+                        "Longitude": ue['location']['longitude'] 
                     })
                 
                 output_data.append({
