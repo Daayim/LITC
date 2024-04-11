@@ -1,9 +1,20 @@
-// jsonParser.jsx
+// fetchData.js
 
-const fs = require('fs');
+import AWS from 'aws-sdk';
 
-const inputFileName = 'snapshot_new.json';
-const outputFileName = 'output.json';
+// Configure the AWS SDK
+// Note: Make sure your AWS credentials are configured in your environment or through the AWS config file. Discuss with Jannah.
+// Look here for documentation https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+AWS.config.update({
+    region: 'ca-central-1',
+    AWS_ACCESS_KEY_ID: 'AWS_ACCESS_KEY_ID',
+    AWS_SECRET_ACCESS_KEY: 'cSsQAKFUCB3/jEC48uiv/b7NJ3RZabb5SDSn0lHQ'
+});
+
+const s3 = new AWS.S3();
+
+const BUCKET_NAME = 'int-tol-modules-daayim-asim';
+const FILE_NAME = 'snapshot_new.json';
 
 const transformData = (inputData) => {
     let outputData = [];
@@ -40,19 +51,22 @@ const transformData = (inputData) => {
     return outputData;
 };
 
-fs.readFile(inputFileName, 'utf8', (err, data) => {
-    if (err) {
-        console.error('Error reading the file:', err);
-        return;
-    }
-    const inputJson = JSON.parse(data);
-    const transformedData = transformData(inputJson);
+export async function fetchBSData(setBaseStations, setIsLoading) {
+    setIsLoading(true);
 
-    fs.writeFile(outputFileName, JSON.stringify(transformedData, null, 4), (err) => {
-        if (err) {
-            console.error('Error writing the file:', err);
-            return;
-        }
-        console.log(`Data transformed and saved to ${outputFileName}`);
-    });
-});
+    const params = {
+        Bucket: BUCKET_NAME,
+        Key: FILE_NAME
+    };
+
+    try {
+        const data = await s3.getObject(params).promise();
+        const objectData = JSON.parse(data.Body.toString());
+        const transformedData = transformData(objectData);
+        setBaseStations(transformedData);
+    } catch (error) {
+        console.error('Error fetching or transforming data from S3:', error);
+    }
+
+    setIsLoading(false);
+}
