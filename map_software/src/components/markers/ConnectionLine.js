@@ -39,7 +39,7 @@ const ConnectionLines = ({ selectedBaseStation, selectedUE,  setShowModel, setSe
               <br></br>
             </div>
             <div style={{ textAlign: 'center' }}>
-            <button nClick={() => setShowModel(true)}>
+            <button onClick={() => setShowModel(true)}>
                 View Details
               </button>
             </div>

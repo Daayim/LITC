@@ -95,7 +95,7 @@ function App() {
     setTimeout(() => {
       setBaseStations(baseStationData); // After 5 seconds, set the data
       setIsLoading(false); // End loading
-    }, 0);
+    }, 1500);
   }
 
   function clearMarkers() {
