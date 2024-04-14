@@ -5,15 +5,16 @@ import AWS from 'aws-sdk';
 // Configure the AWS SDK
 // Note: Make sure your AWS credentials are configured in your environment or through the AWS config file. Discuss with Jannah.
 // Look here for documentation https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+// ADD TO DOC: I managed to get it working privately by pasting keys from IAM user permissions and adding to CORS in bucket permission
 AWS.config.update({
-    region: 'ca-central-1',
-    AWS_ACCESS_KEY_ID: 'AWS_ACCESS_KEY_ID',
-    AWS_SECRET_ACCESS_KEY: 'cSsQAKFUCB3/jEC48uiv/b7NJ3RZabb5SDSn0lHQ'
+    accessKeyId: 'accessKeyId',
+    secretAccessKey: 'secretAccessKey',
+    region: 'ca-central-1'
 });
 
 const s3 = new AWS.S3();
 
-const BUCKET_NAME = 'int-tol-modules-daayim-asim';
+const BUCKET_NAME = 'int-tol-modules';
 const FILE_NAME = 'snapshot_new.json';
 
 const transformData = (inputData) => {
