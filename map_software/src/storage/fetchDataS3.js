@@ -7,9 +7,13 @@ import AWS from 'aws-sdk';
 // Look here for documentation https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 // ADD TO DOC: I managed to get it working privately by pasting keys from IAM user permissions and adding to CORS in bucket permission
 AWS.config.update({
+<<<<<<< HEAD
     accessKeyId: 'accessKeyId',
     secretAccessKey: 'secretAccessKey',
     region: 'ca-central-1'
+=======
+    region: 'ca-central-1',
+>>>>>>> fa14f66610251002c24084df100385d5dac9fbbf
 });
 
 const s3 = new AWS.S3();
